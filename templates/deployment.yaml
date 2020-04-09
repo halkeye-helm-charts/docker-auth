@@ -31,9 +31,7 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ tpl .Values.image.tag . }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          # args: ["-logtostderr","-v", "8","/config/auth_config.yml"]
-          env:
-            - { name: GLOG_logtostderr, value: "1" }
+          args: ["-logtostderr","/config/auth_config.yml"]
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
